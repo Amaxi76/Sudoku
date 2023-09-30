@@ -9,16 +9,20 @@ public class Grille
 	
 	private Nombre[][] grille;
 	private int        niveau;
-	//private int        nbErreur;
+	private int        nbErreur;
 
 	public Grille ( int niveau )
 	{
 		this.grille   = new Nombre [TAILLE_GRILLE] [TAILLE_GRILLE];
 		this.niveau   = niveau;
-		// this.nbErreur = 0;
+		this.nbErreur = 0;
 
 		this.initialiseNiveau ( );
 	}
+
+	public int  getNbErreur ( )            { return this.nbErreur;   }
+	
+	public void setNbErreur ( int nombre ) { this.nbErreur = nombre; }
 
 	/** Fonction qui permet d'obtenir sous forme textuelle notre Grille de Sudoku
 	 * @return retourne sous forme d'une chaine de caractère la grille pour l'afficher dans le terminal
@@ -184,11 +188,9 @@ public class Grille
 	}
 
 	public int statutPartie ( )
-	{	
-		//if ( this.nbErreur > 3                                    ) return -1; // Partie perdu
-
-		if ( !this.estGrilleValide ( ) &&  this.grilleRemplie ( ) ) return -1; // Partie perdu
-		if ( !this.estGrilleValide ( ) && !this.grilleRemplie ( ) ) return 0; // Partie en cours
+	{
+		if ( !this.estGrilleValide ( ) &&  this.grilleRemplie ( ) || this.niveau > 3 ) return -1; // Partie perdu
+		if ( !this.estGrilleValide ( ) && !this.grilleRemplie ( )                    ) return 0;  // Partie en cours
 
 		return 1; // Partie gagné
 	}

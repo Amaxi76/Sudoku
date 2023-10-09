@@ -24,6 +24,7 @@ public class PanelNombres extends JPanel
 		this.addMouseMotionListener ( gs );
 	}
 
+	@Override
 	public void paintComponent ( Graphics g )
 	{
 		super.paintComponent ( g );
@@ -45,11 +46,11 @@ public class PanelNombres extends JPanel
 			}
 			
 			//Dessine le rectangle de fond du chiffre
-			g.setColor      ( new Color ( 255, 255, 255 ) );
+			g.setColor      ( new Color ( 234, 238, 244 ) );
 			g.fillRoundRect ( x, y, 50, 50, 20, 20 );
 
 			// Centre le chiffre par rapport au rectangle et le dessiner
-			g.setColor   ( new Color ( 0, 0, 0 ) );
+			g.setColor   ( new Color ( 49, 90, 175 ) );
 
 			String chiffre = ( cpt + 1 ) + "";
 			FontMetrics fm = g.getFontMetrics ( );
@@ -102,6 +103,13 @@ public class PanelNombres extends JPanel
 			}
 		}
 
+		@Override
+		public void mouseClicked ( MouseEvent e )
+		{
+			System.out.println ( this.getCoordCase ( e.getX ( ), e.getY ( ) ) );
+		}
+
+		@Override
 		public void mouseMoved ( MouseEvent e )
 		{
 			Integer posCase = this.getCoordCase ( e.getX ( ), e.getY ( ) );

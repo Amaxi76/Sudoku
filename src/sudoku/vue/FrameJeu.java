@@ -10,6 +10,7 @@ public class FrameJeu extends JFrame
 {
 	private Controleur   ctrl;
 	private PanelNombres panelNombre;
+	private PanelGrille  panelGrille;
 	private JPanel       panelTmp;
 
 	public FrameJeu ( Controleur ctrl )
@@ -28,13 +29,15 @@ public class FrameJeu extends JFrame
 		// Création des composants
 		this.panelTmp    = new JPanel ( new GridLayout ( 3, 1 ) );
 		this.panelNombre = new PanelNombres ( this.ctrl );
+		this.panelGrille = new PanelGrille  ( this.ctrl );
 
 		//Possitionnement des composants
 		this.panelTmp.add ( new JPanel ( )   );
 		this.panelTmp.add ( this.panelNombre );
 		this.panelTmp.add ( new JPanel ( )   );
 
-		this.add ( this.panelNombre, BorderLayout.EAST );
+		this.add ( this.panelGrille, BorderLayout.CENTER );
+		this.add ( this.panelNombre, BorderLayout.EAST   );
 
 		this.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
 		this.setVisible               ( true                 );

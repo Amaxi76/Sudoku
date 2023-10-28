@@ -1,9 +1,7 @@
 package sudoku.vue;
 
 import sudoku.*;
-
 import java.awt.*;
-
 import javax.swing.JPanel;
 
 public class PanelGrille extends JPanel
@@ -31,7 +29,7 @@ public class PanelGrille extends JPanel
 		int x = 150;
 		int y = this.ctrl.getIhm ( ) == null ? ( int ) ( tailleEcran.getHeight ( ) * 0.80 ) / 2 - 250 : ( int ) this.ctrl.getHauteur ( ).getHeight ( ) / 2 - 250;
 
-		g.drawRect ( x, y, 498, 498 );
+		this.ecrireNumero ( g, y );
 
 		for ( int cpt = 0; cpt < 9; cpt++ )
 		{
@@ -41,25 +39,30 @@ public class PanelGrille extends JPanel
 				y += 166;
 			}
 
-			int x2 = x;
-			int y2 = y;
-
-			for ( int cpt2 = 0; cpt2 < 9; cpt2++ )
-			{
-				if ( cpt2 != 0  && cpt2 % 3 == 0 )
-				{
-					x2  = x;
-					y2 += 55;
-				}
-
-				g.drawRect ( x2, y2, 55, 55 );
-				
-				x2 += 55;
-			}
+			// Cadrillage
+			g.drawLine ( x +  55, y      , x +  55, y + 166 );
+			g.drawLine ( x + 110, y      , x + 110, y + 166 );
+			g.drawLine ( x      , y +  55, x + 166, y +  55 );
+			g.drawLine ( x      , y + 110, x + 166, y + 110 );
 
 			g.drawRect ( x, y, 166, 166 );
-			
+
+			// Ajout de l'épaisseur du trait
+			g.drawRect ( x-1, y-1, 166, 166 );
+
 			x += 166;
 		}
+	}
+
+	public void ecrireNumero ( Graphics g, int y )
+	{
+		for ( int lig = 0 ; lig < 9 ; lig++ )
+			for ( int col = 0 ; col < 9 ; col++ )
+			{
+				int valCase = this.ctrl.getCase ( lig, col );
+				if ( valCase > 0 )
+					g.drawString ( "" + valCase, 173 + ( lig * 55 ), ( y + 34 ) + ( col * 55 ) );
+			}
+			
 	}
 }

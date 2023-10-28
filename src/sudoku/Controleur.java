@@ -26,7 +26,7 @@ public class Controleur
 		// 	{
 		// 		while ( !this.metier.grilleRemplie ( ) || valider != 'O' )
 		// 		{
-		// 			System.out.println ( this.metier.afficherGrille ( ) );
+		// 			System.out.println ( this.metier );
 
 		// 			int ligne;
 		// 			do
@@ -107,6 +107,11 @@ public class Controleur
 	public Dimension getHauteur ( )
 	{
 		return this.ihm.getSize ( );
+	}
+
+	public int getCase ( int x, int y )
+	{
+		return this.metier.getCase ( x, y );
 	}
 
 	public static void main ( String[] args )

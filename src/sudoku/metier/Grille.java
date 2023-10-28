@@ -27,7 +27,8 @@ public class Grille
 	/** Fonction qui permet d'obtenir sous forme textuelle notre Grille de Sudoku
 	 * @return retourne sous forme d'une chaine de caractère la grille pour l'afficher dans le terminal
 	 */
-	public String afficherGrille ( )
+	@Override
+	public String toString ( )
 	{
 		String sRet = "-----------------------------\n" +
 		              "| / | A B C | D E F | G H I |\n" +
@@ -195,4 +196,8 @@ public class Grille
 		return 1; // Partie gagné
 	}
 	
+	public int getCase ( int x, int y )
+	{
+		return this.grille [ x ] [ y ].getValeur ( );
+	}
 }

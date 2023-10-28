@@ -196,8 +196,8 @@ public class Grille
 		return 1; // Partie gagné
 	}
 	
-	public int getCase ( int x, int y )
+	public Nombre getCase ( int x, int y )
 	{
-		return this.grille [ x ] [ y ].getValeur ( );
+		return this.grille [ x ] [ y ];
 	}
 }

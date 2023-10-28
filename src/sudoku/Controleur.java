@@ -109,7 +109,7 @@ public class Controleur
 		return this.ihm.getSize ( );
 	}
 
-	public int getCase ( int x, int y )
+	public Nombre getCase ( int x, int y )
 	{
 		return this.metier.getCase ( x, y );
 	}

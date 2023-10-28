@@ -20,8 +20,8 @@ public class PanelNombres extends JPanel
 		this.setPreferredSize ( new Dimension ( 300, 0 ) );
 		this.repaint ( );
 
-		this.addMouseListener       ( gs );
-		this.addMouseMotionListener ( gs );
+		this.addMouseListener       ( this.gs );
+		this.addMouseMotionListener ( this.gs );
 	}
 
 	@Override

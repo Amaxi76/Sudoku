@@ -106,7 +106,7 @@ public class PanelNombres extends JPanel
 		@Override
 		public void mouseClicked ( MouseEvent e )
 		{
-			System.out.println ( this.getCoordCase ( e.getX ( ), e.getY ( ) ) );
+			this.ctrl.jouer ( this.getCoordCase ( e.getX ( ), e.getY ( ) ) + 1 );
 		}
 
 		@Override

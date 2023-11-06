@@ -7,7 +7,8 @@ import sudoku.vue.*;
 
 public class Controleur
 {
-	// TODO: Faire une partie GUI, faire statistique
+	// TODO: faire statistique
+	// TODO: Continuer la partie graphique, gérer la fin de partie
 
 	private FrameJeu ihm;
 	private Grille   metier;
@@ -24,7 +25,7 @@ public class Controleur
 		// {
 		// 	while ( statutPartie != 1 )
 		// 	{
-		// 		while ( !this.metier.grilleRemplie ( ) || valider != 'O' )
+		// 		while ( !this.metier.estGrilleRemplie ( ) || valider != 'O' )
 		// 		{
 		// 			System.out.println ( this.metier );
 
@@ -59,7 +60,7 @@ public class Controleur
 
 		// 			this.metier.insererGrille ( valeur, ligne, colonne );
 
-		// 			if ( this.metier.grilleRemplie ( ) )
+		// 			if ( this.metier.estGrilleRemplie ( ) )
 		// 			{
 		// 				System.out.println ( "Voulez-vous valider la grille ? ");
 		// 				valider = Clavier.lire_char ( );
@@ -97,21 +98,40 @@ public class Controleur
 		this.metier    = new Grille   ( this.numNiveau );
 	}
 
-	public FrameJeu getIhm ( ) { return ihm; }
-
 	public void rejouer ( )
 	{
 		this.metier = new Grille ( ++ this.numNiveau );
 	}
 
-	public Dimension getHauteur ( )
+	public FrameJeu  getIhm     (              ) { return ihm; }
+	public Dimension getHauteur (              ) { return this.ihm.getSize ( );         }
+	public Nombre    getCase    ( int x, int y ) { return this.metier.getCase ( x, y ); }
+
+	public void jouer ( int valeur )
 	{
-		return this.ihm.getSize ( );
+		Integer[] caseS = this.ihm.getCoordCase ( );
+
+		this.metier.insererGrille ( valeur, caseS[0] + 1, ( char ) ( 'A' + caseS[1] ) );
+
+		this.ihm.resetSelection ( );
+		this.ihm.maj            ( );
+
+		switch ( this.metier.statutPartie ( ) )
+		{
+			case  1:
+				break;
+
+			case -1:
+				break;
+		
+			default:
+				break;
+		}
 	}
 
-	public Nombre getCase ( int x, int y )
+	public void finDePartie ( )
 	{
-		return this.metier.getCase ( x, y );
+		
 	}
 
 	public static void main ( String[] args )

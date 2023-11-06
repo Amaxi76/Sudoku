@@ -19,7 +19,7 @@ public class FrameJeu extends JFrame
 
 		Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit ( ).getScreenSize ( );
 
-		int l = ( tailleEcran.width  - ( int ) ( tailleEcran.getWidth ( )  * 0.80 ) ) / 2;
+		int l = ( tailleEcran.width  - ( int ) ( tailleEcran.getWidth  ( ) * 0.80 ) ) / 2;
 		int h = ( tailleEcran.height - ( int ) ( tailleEcran.getHeight ( ) * 0.80 ) ) / 2;
 
 		this.setTitle    ( "Sudoku"                                                                                  );
@@ -27,9 +27,9 @@ public class FrameJeu extends JFrame
 		this.setLocation (    l,   h                                                                                 );
 
 		// Création des composants
-		this.panelTmp    = new JPanel ( new GridLayout ( 3, 1 ) );
-		this.panelNombre = new PanelNombres ( this.ctrl );
-		this.panelGrille = new PanelGrille  ( this.ctrl );
+		this.panelTmp    = new JPanel       ( new GridLayout ( 3, 1 ) );
+		this.panelNombre = new PanelNombres ( this.ctrl               );
+		this.panelGrille = new PanelGrille  ( this.ctrl               );
 
 		//Possitionnement des composants
 		this.panelTmp.add ( new JPanel ( )   );
@@ -41,5 +41,21 @@ public class FrameJeu extends JFrame
 
 		this.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
 		this.setVisible               ( true                 );
+	}
+
+	public Integer[] getCoordCase ( )
+	{
+		return this.panelGrille.getCoordCase ( );
+	}
+
+	public void maj ( )
+	{
+		this.panelGrille.repaint ( );
+		this.panelNombre.repaint ( );
+	}
+
+	public void resetSelection ( )
+	{
+		this.panelGrille.resetSelection ( );
 	}
 }

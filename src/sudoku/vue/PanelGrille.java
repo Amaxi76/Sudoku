@@ -6,6 +6,8 @@ import java.awt.event.*;
 
 import javax.swing.JPanel;
 
+import sudoku.metier.*;
+
 public class PanelGrille extends JPanel 
 {
 	private Controleur ctrl;
@@ -38,8 +40,6 @@ public class PanelGrille extends JPanel
 		int x = 150;
 		int y = this.ctrl.getIhm ( ) == null ? ( int ) ( tailleEcran.getHeight ( ) * 0.80 ) / 2 - 250 : ( int ) this.ctrl.getHauteur ( ).getHeight ( ) / 2 - 250;
 
-
-		//FIXME: Vu que le nombre n'est pas divisible par 3, un décalage se passe sur la fin 
 		//Mise en valeur de la case sélectionnée
 		if ( this.caseSelect[0] != null )
 			g.fillRect ( x + ( 56 * this.caseSelect[0] ), y + ( 56 * this.caseSelect[1] ), 56, 56 );
@@ -74,12 +74,28 @@ public class PanelGrille extends JPanel
 		for ( int lig = 0 ; lig < 9 ; lig++ )
 			for ( int col = 0 ; col < 9 ; col++ )
 			{
-				int valCase = this.ctrl.getCase ( lig, col ).getValeur ( );
-				if ( valCase > 0 )
-					g.drawString ( "" + valCase, 173 + ( lig * 56 ), ( y + 34 ) + ( col * 56 ) );
+				Nombre caseN = this.ctrl.getCase ( lig, col );
+				if ( caseN.estModifiable ( ) )
+					g.setColor ( new Color (  0,  0,   0 ) );
+				else
+					g.setColor ( new Color ( 49, 90, 175 ) );
+
+				if ( caseN.getValeur ( ) > 0 )
+					g.drawString ( "" + caseN.getValeur ( ), 173 + ( lig * 56 ), ( y + 34 ) + ( col * 56 ) );
 			}
 			
 	}
+
+	public Integer[] getCoordCase ( )
+	{
+		return this.caseSelect;
+	}
+
+	public void resetSelection ( )
+	{
+		this.caseSelect[0] = null;
+	}
+
 	public class GereSouris extends MouseAdapter
 	{
 		private static final int NB_CASE = 9;
@@ -114,8 +130,8 @@ public class PanelGrille extends JPanel
 
 			if ( coordCase[0] != null && this.ctrl.getCase( coordCase[0], coordCase[1] ).estModifiable ( ) )
 			{
-				PanelGrille.this.caseSelect[0] = coordCase[0];
-				PanelGrille.this.caseSelect[1] = coordCase[1];
+					PanelGrille.this.caseSelect[0] = coordCase[0];
+					PanelGrille.this.caseSelect[1] = coordCase[1];
 			}
 			else
 			{
@@ -128,9 +144,7 @@ public class PanelGrille extends JPanel
 
 		@Override
 		public void mouseMoved ( MouseEvent e )
-		{
-			System.out.println ( String.format("Coord X : %d | Coord Y : %d", e.getX(), e.getY()));
-			
+		{	
 			Integer[] posCase = this.getCoordCase ( e.getX ( ), e.getY ( ) );
 
 			if ( posCase != null ) PanelGrille.this.setCursor ( new Cursor ( Cursor.HAND_CURSOR    ) );
@@ -153,7 +167,7 @@ public class PanelGrille extends JPanel
 						return pos;
 					}
 
-			return null;
+			return new Integer[2];
 		}
 	}
 }

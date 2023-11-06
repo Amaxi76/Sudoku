@@ -20,7 +20,8 @@ public class Grille
 		this.initialiseNiveau ( );
 	}
 
-	public int  getNbErreur ( )            { return this.nbErreur;   }
+	public Nombre  getCase     ( int x, int y ) { return this.grille [ x ] [ y ]; }
+	public int     getNbErreur (              ) { return this.nbErreur;           }
 	
 	public void setNbErreur ( int nombre ) { this.nbErreur = nombre; }
 
@@ -178,7 +179,7 @@ public class Grille
 		return true;
 	}
 
-	public boolean grilleRemplie ( )
+	public boolean estGrilleRemplie ( )
 	{
 		for ( int cptLig = 0; cptLig < this.grille.length; cptLig++ )
 			for ( int cptCol = 0; cptCol < this.grille.length; cptCol++ )
@@ -188,16 +189,13 @@ public class Grille
 		return true;
 	}
 
-	public int statutPartie ( )
+	public int     statutPartie ( )
 	{
-		if ( !this.estGrilleValide ( ) &&  this.grilleRemplie ( ) || this.niveau > 3 ) return -1; // Partie perdu
-		if ( !this.estGrilleValide ( ) && !this.grilleRemplie ( )                    ) return 0;  // Partie en cours
+		if ( ( !this.estGrilleValide ( ) && this.estGrilleRemplie ( ) ) || this.nbErreur > 2 ) return -1; // Partie perdu
+		if (   !this.estGrilleValide ( ) && this.estGrilleRemplie ( )   && this.nbErreur < 4 ) return  0; // Partie en cours
 
 		return 1; // Partie gagné
 	}
 	
-	public Nombre getCase ( int x, int y )
-	{
-		return this.grille [ x ] [ y ];
-	}
+	
 }
